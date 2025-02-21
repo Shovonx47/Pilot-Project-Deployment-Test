@@ -144,6 +144,21 @@ const data = {
         }
       ],
     },
+    {
+      title: "Off Day Setup",
+      url: "#",
+      icon: GraduationCap,
+      items: [
+        {
+          title: "Add Off Day Setup",
+          url: "/off-day-setup/add-off-day",
+        },
+        {
+          title: "Edit Off Day Setup",
+          url: "/off-day-setup/edit-off-day",
+        }
+      ],
+    },
      
   ],
 };

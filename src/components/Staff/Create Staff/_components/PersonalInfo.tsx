@@ -33,9 +33,9 @@ interface PersonalInfoProps {
 const PersonalInfo = ({ control, setValue, trigger }: PersonalInfoProps) => {
     return (
         <div className="p-6 bg-white">
-            <h2 className="text-xl font-semibold text-gray-800">Add Teacher</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Add Staff</h2>
             <nav className="text-sm text-gray-500 mb-4">
-                Dashboard / Teachers / <span className="text-gray-800">Add Teacher</span>
+                Dashboard / Staffs / <span className="text-gray-800">Add Staff</span>
             </nav>
 
             <div className="border rounded-md">
