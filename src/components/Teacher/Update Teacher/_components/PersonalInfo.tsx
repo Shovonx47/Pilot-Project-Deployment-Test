@@ -62,9 +62,9 @@ const PersonalInfo = ({ control, setValue, trigger, singleTeacher }: PersonalInf
 
     return (
         <div className="p-6 bg-white">
-            <h2 className="text-xl font-semibold text-gray-800">Add Teacher</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Update Teacher</h2>
             <nav className="text-sm text-gray-500 mb-4">
-                Dashboard / Teachers / <span className="text-gray-800">Add Teacher</span>
+                Dashboard / Teachers / <span className="text-gray-800">Update Teacher</span>
             </nav>
 
             <div className="border rounded-md">

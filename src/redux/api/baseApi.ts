@@ -12,6 +12,7 @@ export const baseApi = createApi({
     "account_officer",
     "class_routine",
     "exam_schedule",
+    "off_day",
   ],
   endpoints: () => ({}),
 });
