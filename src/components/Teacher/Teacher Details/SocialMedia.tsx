@@ -10,7 +10,7 @@ interface DataProps {
   
   export default function WorkDetails({ data }: DataProps) {
     return (
-      <div className="p-4 border rounded-lg bg-white">
+      <div className="p-4 border rounded-lg bg-white shadow-md">
         <h3 className="text-lg mb-4">Social Media</h3>
         <hr className="border-gray-200 -mx-4 mb-3" />
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-x-4">
