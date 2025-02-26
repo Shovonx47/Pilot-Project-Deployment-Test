@@ -3,25 +3,24 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../ui/button";
 import { toast } from "sonner";
 import LoadingSpinner from "@/components/Loader";
-import BasicInfo from "./_components/BasicInfo";
-import Exams from "./_components/Exams";
 import { useGetSingleExamSettingQuery, useUpdateExamSettingMutation } from "@/redux/api/Exam-schedule/examScheduleApi";
+import OffDay from "./_components/OffDay";
+import { useGetSingleOffDaySetupQuery, useUpdateOffDaySetupMutation } from "@/redux/api/OffDaySetup/offDaySetupApi";
 
 
 
 const formSections = [
-    BasicInfo,
-    Exams
+    OffDay
 ];
 
-const UpdateExamScheduleForm = () => {
-    const id = "67af378a197433b9b75dfe9d"
+const UpdateOffDaySetupForm = () => {
+    const id = "67b98bab757475eda2ca50a9"
 
-    const { control, handleSubmit, setValue, watch, trigger, getValues } = useForm({});
+    const { control, handleSubmit, setValue, trigger, getValues } = useForm({});
 
-    const { data: singleExamSchedule, isLoading, refetch } = useGetSingleExamSettingQuery(id)
+    const { data: singleOffDay, isLoading, refetch } = useGetSingleOffDaySetupQuery(id)
 
-    const [updateExamSchedule, { isLoading: updateLoading }] = useUpdateExamSettingMutation()
+    const [updateOffDaySetup, { isLoading: updateLoading }] = useUpdateOffDaySetupMutation()
 
     const onSubmit = async (data: any) => {
 
@@ -32,7 +31,7 @@ const UpdateExamScheduleForm = () => {
                 data
             }
 
-            const response = await updateExamSchedule(values).unwrap();
+            const response = await updateOffDaySetup(values).unwrap();
 
             if (response.success) {
                 toast.success(response.message);
@@ -68,7 +67,7 @@ const UpdateExamScheduleForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
             {formSections.map((Component, index) => (
-                <Component key={index} control={control} setValue={setValue} watch={watch} trigger={trigger} getValues={getValues} singleExamSchedule={singleExamSchedule} />
+                <Component key={index} control={control} setValue={setValue} trigger={trigger} getValues={getValues} singleOffDay={singleOffDay} />
             ))}
 
             <div className="flex justify-end m-10">
@@ -85,4 +84,4 @@ const UpdateExamScheduleForm = () => {
     );
 }
 
-export default UpdateExamScheduleForm
+export default UpdateOffDaySetupForm

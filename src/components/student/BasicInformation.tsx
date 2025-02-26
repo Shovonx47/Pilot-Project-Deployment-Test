@@ -2,22 +2,30 @@ import Image from 'next/image';
 
 interface StudentProps {
   student: {
-    avatar: string;
-    name: string;
-    id: string;
-    rollNo: string;
+    profileImage: string;
+    status: string;
+    firstName: string;
+    lastName: string;
+
+    studentId: string;
+    gender: string;
+    dateOfBirth: string;
+    bloodGroup: string;
+    religion: string;
+    class: string;
+    motherTongue: string;
   }
 }
 
 export default function BasicInformation({ student }: StudentProps) {
   const studentInfo = {
-    "Roll No": "777",
-    "Gender": "Female",
-    "Date Of Birth": "15 Jan 2015",
-    "Blood Group": "O +ve",
-    "Religion": "Islam",
-    "Class": "III",
-    "Mother tongue": "Bangla",
+    "Roll No": student?.studentId,
+    "Gender": student?.gender,
+    "Date Of Birth": student?.dateOfBirth,
+    "Blood Group": student?.bloodGroup,
+    "Religion": student?.religion,
+    "Class": student?.class,
+    "Mother tongue": student?.motherTongue,
     "Language": (
       <div className="flex gap-2">
         <span className="px-2 py-1 bg-gray-100 text-black rounded text-sm">Bangla</span>
@@ -26,22 +34,23 @@ export default function BasicInformation({ student }: StudentProps) {
     )
   };
 
+
   return (
     <div className="bg-white rounded-lg p-6 shadow-md">
       {/* Header with Image and Name */}
       <div className="flex items-center gap-4 mb-6">
-        <Image 
-          src={student.avatar}
-          alt={student.name}
+        <Image
+          src={student?.profileImage}
+          alt={student?.firstName}
           width={64}
           height={64}
           className="rounded-full"
         />
         <div>
-          <h2 className="text-lg font-semibold text-headerText">{student.name}</h2>
+          <h2 className="text-lg font-semibold text-headerText">{student?.firstName} {student?.lastName}</h2>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-[#3D5EE1]">{student.id}</span>
-            <span className="px-2 py-0.5 text-xs bg-green-100 text-green-600 rounded">Active</span>
+            <span className="text-sm text-[#3D5EE1]">{student?.studentId}</span>
+            <span className="px-2 py-0.5 text-xs bg-green-100 text-green-600 rounded">{student?.status}</span>
           </div>
         </div>
       </div>
