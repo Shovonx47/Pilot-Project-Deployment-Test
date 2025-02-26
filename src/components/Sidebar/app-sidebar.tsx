@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { TeamSwitcher } from "./team-switcher";
 import { NavMain } from "./sidebar-main";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Users } from "lucide-react";
 
 // This is sample data.
 const data = {
@@ -92,6 +92,17 @@ const data = {
         {
           title: "All Staffs",
           url: "/staff/all-staff",
+        },
+      ],
+    },
+    {
+      title: "Human Resource",
+      url: "#",
+      icon: Users,
+      items: [
+        {
+          title: "HR Dashboard",
+          url: "/human-resource/hr-dashboard",
         },
       ],
     },
