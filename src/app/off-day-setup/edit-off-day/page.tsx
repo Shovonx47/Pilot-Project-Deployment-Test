@@ -1,5 +1,6 @@
+import UpdateOffDaySetupForm from '@/components/OffDaySetup/UpdateOffDaySetup/UpdateOffDaySetup';
 import React from 'react';
-import UpdateExamScheduleForm from '@/components/ExamSchedule/Update Exam Schedule/UpdateExamSchedule';
+ 
 
 // interface PageProps {
 //     params: {
@@ -15,7 +16,7 @@ import UpdateExamScheduleForm from '@/components/ExamSchedule/Update Exam Schedu
 
     return (
         <div>
-            <UpdateExamScheduleForm />
+            <UpdateOffDaySetupForm />
         </div>
     );
 };

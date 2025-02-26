@@ -4,8 +4,9 @@ interface SiblingProps {
   siblings: {
     id: string;
     avatar: string;
-    name: string;
+    siblingName: string;
     class: string;
+    roll: string;
   }[]
 }
 
@@ -17,14 +18,15 @@ export default function SiblingInformation({ siblings }: SiblingProps) {
         <div key={sibling.id} className="flex items-center gap-4 bg-[#FAFAFA] p-4 flex-col sm:flex-row">
           <Image
             src={sibling.avatar}
-            alt={sibling.name}
+            alt={sibling.siblingName}
             width={40}
             height={40}
             className="rounded-full"
           />
           <div>
-            <p className="font-medium">{sibling.name}</p>
-            <p className="text-sm text-gray-500">{sibling.class}</p>
+            <p className="font-medium">{sibling.siblingName}</p>
+            <p className="text-sm text-gray-500">Class: {sibling.class}</p>
+            <p className="text-sm text-gray-500">Roll: {sibling.roll}</p>
           </div>
         </div>
       ))}

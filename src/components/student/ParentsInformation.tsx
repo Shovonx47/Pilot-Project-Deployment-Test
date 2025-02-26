@@ -1,17 +1,62 @@
 import Image from 'next/image';
 
+interface Parent {
+  name: string;
+  relation: string;
+  avatar: string;
+  phone: string;
+  email: string;
+}
+
 interface ParentsProps {
   parents: {
-    id: string;
-    avatar: string;
-    name: string;
-    relation: string;
-    phone: string;
-    email: string;
-  }[]
+    fatherName: string;
+    fatherEmail: string;
+    fatherContactNumber: string;
+    fatherOccupation: string;
+    fatherNidNumber: string;
+
+    motherName: string;
+    motherEmail: string;
+    motherContactNumber: string;
+    motherOccupation: string;
+    motherNidNumber: string;
+
+    localGuardianName: string;
+    relationshipWithLocalGuardian: string;
+    localGuardianEmail: string;
+    localGuardianContactNumber: string;
+    localGuardianOccupation: string;
+    localGuardianNidNumber: string;
+  };
 }
 
 export default function ParentsInformation({ parents }: ParentsProps) {
+  // Convert parents object into an array to use .map()
+  const parentList: Parent[] = [
+    {
+      name: parents.fatherName,
+      relation: 'Father',
+      avatar: 'https://res.cloudinary.com/dfunuoqfv/image/upload/v1739459701/e11e9ztb1d3z3imbzj3g.png',  
+      phone: parents.fatherContactNumber,
+      email: parents.fatherEmail,
+    },
+    {
+      name: parents.motherName,
+      relation: 'Mother',
+      avatar: 'https://res.cloudinary.com/dfunuoqfv/image/upload/v1739459701/e11e9ztb1d3z3imbzj3g.png',  
+      phone: parents.motherContactNumber,
+      email: parents.motherEmail,
+    },
+    {
+      name: parents.localGuardianName,
+      relation: parents.relationshipWithLocalGuardian || 'Local Guardian',
+      avatar: 'https://res.cloudinary.com/dfunuoqfv/image/upload/v1739459701/e11e9ztb1d3z3imbzj3g.png', 
+      phone: parents.localGuardianContactNumber,
+      email: parents.localGuardianEmail,
+    },
+  ];
+
   return (
     <div className="space-y-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
       <div>
@@ -19,10 +64,13 @@ export default function ParentsInformation({ parents }: ParentsProps) {
         <hr className="border-gray-200 -mx-6 mb-3" />
       </div>
       <div className="space-y-4">
-        {parents.map((parent) => (
-          <div key={parent.id} className="flex items-center gap-8 p-4 border rounded-lg flex-col sm:flex-row">
+        {parentList.map((parent, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-8 p-4 border rounded-lg flex-col sm:flex-row"
+          >
             <div className="flex items-center gap-4 flex-1">
-              <Image 
+              <Image
                 src={parent.avatar}
                 alt={parent.name}
                 width={48}

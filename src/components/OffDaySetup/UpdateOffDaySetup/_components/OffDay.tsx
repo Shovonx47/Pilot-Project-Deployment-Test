@@ -10,25 +10,36 @@ import { Textarea } from "@/components/ui/textarea";
 
 const getDayOfWeek = (dateString: string) => {
     if (!dateString) return "";
-
-    // Convert string to Date object in UTC
     const [day, month, year] = dateString.split("-").map(Number);
     const date = new Date(Date.UTC(year, month - 1, day)); // Month is 0-based in JS
-
-    if (isNaN(date.getTime())) return ""; // If invalid date, return empty
-
-    return date.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" });
+    return isNaN(date.getTime()) ? "" : date.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" });
 };
 
+interface offDays {
+    title: string;
+    description: string;
+    startDay: string;
+    endDay?: string;
+    startDate: string;
+    endDate?: string;
+}
+
+interface OffDaysProps {
+    data: {
+        offDays: offDays[];
+        createdBy: string;
+    };
+}
 
 interface OffDayInfoProps {
-    control: Control<FieldValues>
+    control: Control<FieldValues>;
     setValue: (name: string, value: any) => void;
     trigger: (name: string) => void;
     getValues: any;
+    singleOffDay: OffDaysProps;
 }
 
-const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
+const OffDay = ({ control, setValue, trigger, getValues, singleOffDay }: OffDayInfoProps) => {
     const { fields, append, remove, replace } = useFieldArray({
         control,
         name: "offDays",
@@ -36,7 +47,7 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
 
     useEffect(() => {
         if (fields.length === 0) {
-            replace([{ title: "", description: "", startDate: "", startDay: "", endDate: "", endDay: "", createdBy: "" }]);
+            replace(singleOffDay?.data?.offDays || [{ title: "", description: "", startDate: "", startDay: "", endDate: "", endDay: "" }]);
         }
     }, [replace, fields.length]);
 
@@ -50,6 +61,9 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                 </div>
 
                 <div className="m-4">
+                    {/* Created By Field (ONLY ONCE) */}
+
+
                     {fields.map((field, index) => (
                         <div key={field.id} className={`lg:flex justify-between gap-x-4 mb-4 pb-4 ${index !== fields.length - 1 ? "border-b border-gray-300" : ""}`}>
                             <div className="w-full">
@@ -68,7 +82,6 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                         )}
                                     />
 
-
                                     {/* Start Date */}
                                     <Controller
                                         name={`offDays.${index}.startDate`}
@@ -80,8 +93,7 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                                     value={field.value}
                                                     onChange={(formattedDate) => {
                                                         setValue(`offDays.${index}.startDate`, formattedDate);
-                                                        const dayOfWeek = getDayOfWeek(formattedDate);
-                                                        setValue(`offDays.${index}.startDay`, dayOfWeek); // Auto-set day
+                                                        setValue(`offDays.${index}.startDay`, getDayOfWeek(formattedDate));
                                                         trigger(`offDays.${index}.startDate`);
                                                     }}
                                                     label="Start Date"
@@ -102,8 +114,8 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                             </div>
                                         )}
                                     />
-                                    {/* End Date */}
 
+                                    {/* End Date */}
                                     <Controller
                                         name={`offDays.${index}.endDate`}
                                         control={control}
@@ -116,11 +128,9 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
 
                                                     const startDate = new Date(startYear, startMonth - 1, startDay);
                                                     const endDate = new Date(endYear, endMonth - 1, endDay);
-                                                    if (endDate === startDate){ return "End Date cannot be equal to Start Date." };
-                                                    if (endDate < startDate) {
-                                                        return "End Date cannot be earlier than Start Date.";
-                                                    }
-                                                    
+
+                                                    if (endDate < startDate) return "End Date cannot be earlier than Start Date.";
+                                                    if (endDate === startDate) return "End Date cannot be equal to Start Date.";
                                                 }
                                                 return true;
                                             },
@@ -131,8 +141,7 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                                     value={field.value}
                                                     onChange={(formattedDate) => {
                                                         setValue(`offDays.${index}.endDate`, formattedDate);
-                                                        const dayOfWeek = getDayOfWeek(formattedDate);
-                                                        setValue(`offDays.${index}.endDay`, dayOfWeek); // Auto-set day
+                                                        setValue(`offDays.${index}.endDay`, getDayOfWeek(formattedDate));
                                                         trigger(`offDays.${index}.endDate`);
                                                     }}
                                                     label="End Date"
@@ -141,8 +150,6 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                             </div>
                                         )}
                                     />
-
-
 
                                     {/* Auto-Selected End Day */}
                                     <Controller
@@ -155,10 +162,9 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                                             </div>
                                         )}
                                     />
-
-
-
                                 </div>
+
+                                {/* Description */}
                                 <div className="flex gap-2">
                                     <Controller
                                         name={`offDays.${index}.description`}
@@ -188,9 +194,6 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
 
                                 </div>
                             </div>
-
-                            {/* Delete Button */}
-
                         </div>
                     ))}
 
@@ -199,11 +202,11 @@ const OffDay = ({ control, setValue, trigger, getValues }: OffDayInfoProps) => {
                         <Button type="button" onClick={() => append({ title: "", description: "", startDate: "", startDay: "", endDate: "", endDay: "" })} className="mt-4">
                             <SquarePlus /> Add Day
                         </Button>
-                        {/* Created By */}
                         <div className="mb-4">
                             <Controller
                                 name="createdBy"
                                 control={control}
+                                defaultValue={singleOffDay?.data?.createdBy || ""}
                                 rules={{ required: "Created By is required" }}
                                 render={({ field, fieldState: { error } }) => (
                                     <div>
