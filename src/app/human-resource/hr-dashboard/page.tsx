@@ -61,7 +61,7 @@ export default function Page() {
         <div className="w-full">
           <Schedule />
         </div>
-        <div className="w-full">
+        <div className="w-full -mt-6">
           <DashboardStats />
         </div>
         <div className="flex flex-col gap-6">
