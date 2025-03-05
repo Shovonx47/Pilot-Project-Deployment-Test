@@ -10,7 +10,19 @@ import {
 } from "@/components/ui/sidebar";
 import { TeamSwitcher } from "./team-switcher";
 import { NavMain } from "./sidebar-main";
-import { GraduationCap, Users } from "lucide-react";
+import {
+  GraduationCap,
+  Users,
+  UserCog,
+  Calculator,
+  Building2,
+  ClipboardList,
+  Calendar,
+  Clock,
+  CalendarOff,
+  Settings,
+  WalletCards
+} from "lucide-react";
 
 // This is sample data.
 const data = {
@@ -52,7 +64,7 @@ const data = {
     {
       title: "Teacher",
       url: "#",
-      icon: GraduationCap,
+      icon: Users,
       items: [
         {
           title: "Add Teacher",
@@ -79,7 +91,7 @@ const data = {
     {
       title: "Staff",
       url: "#",
-      icon: GraduationCap,
+      icon: UserCog,
       items: [
         {
           title: "Add Staff",
@@ -96,9 +108,20 @@ const data = {
       ],
     },
     {
+      title: "Accounts",
+      url: "#",
+      icon: Calculator,
+      items: [
+        {
+          title: "Income and Expenses",
+          url: "/accounts/income-and-expense",
+        },
+      ],
+    },
+    {
       title: "Human Resource",
       url: "#",
-      icon: Users,
+      icon: Building2,
       items: [
         {
           title: "HR Dashboard",
@@ -109,7 +132,7 @@ const data = {
     {
       title: "Accountant",
       url: "#",
-      icon: GraduationCap,
+      icon: WalletCards,
       items: [
         {
           title: "Add Accountant",
@@ -128,7 +151,7 @@ const data = {
     {
       title: "Create Class Routine",
       url: "#",
-      icon: GraduationCap,
+      icon: ClipboardList,
       items: [
         {
           title: "Add Class Routine",
@@ -143,7 +166,7 @@ const data = {
     {
       title: "Exam Schedule",
       url: "#",
-      icon: GraduationCap,
+      icon: Calendar,
       items: [
         {
           title: "Add Exam Schedule",
@@ -158,7 +181,7 @@ const data = {
     {
       title: "Off Day Setup",
       url: "#",
-      icon: GraduationCap,
+      icon: CalendarOff,
       items: [
         {
           title: "Add Off Day Setup",
@@ -173,7 +196,7 @@ const data = {
     {
       title: "Admin",
       url: "#",
-      icon: GraduationCap,
+      icon: Settings,
       items: [
         {
           title: "Class Routine",
@@ -188,7 +211,7 @@ const data = {
     {
       title: "Payroll",
       url: "#",
-      icon: GraduationCap,
+      icon: Calculator,
       items: [
         {
           title: "Employee Payroll",
