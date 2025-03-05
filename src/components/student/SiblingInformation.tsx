@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface SiblingProps {
-  siblings: {
+  siblings?: {
     id: string;
     avatar: string;
     siblingName: string;
@@ -10,15 +10,24 @@ interface SiblingProps {
   }[]
 }
 
-export default function SiblingInformation({ siblings }: SiblingProps) {
+export default function SiblingInformation({ siblings = [] }: SiblingProps) {
+  if (!siblings || siblings.length === 0) {
+    return (
+      <div className="space-y-4 bg-white rounded-lg p-6 shadow-md">
+        <h3 className="text-lg font-semibold">Sibling Information</h3>
+        <p className="text-gray-500">No siblings information available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4 bg-white rounded-lg p-6 shadow-md">
       <h3 className="text-lg font-semibold">Sibling Information</h3>
       {siblings.map((sibling) => (
         <div key={sibling.id} className="flex items-center gap-4 bg-[#FAFAFA] p-4 flex-col sm:flex-row">
           <Image
-            src={sibling.avatar}
-            alt={sibling.siblingName}
+            src={sibling.avatar || '/default-avatar.svg'}
+            alt={sibling.siblingName || 'Sibling'}
             width={40}
             height={40}
             className="rounded-full"

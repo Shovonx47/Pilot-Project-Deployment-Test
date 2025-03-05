@@ -28,16 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <body
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Providers>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
           <SidebarProvider>
             <AppSidebar />
             <main className="w-full flex flex-col min-h-screen relative">
-
               <div>{children}</div>
-
               <div className="lg:-ml-[16rem]">
                 {/* <Footer /> */}
               </div>
@@ -45,8 +44,8 @@ export default function RootLayout({
               {/* <ToastContainer /> */}
             </main>
           </SidebarProvider>
-        </body>
-    </Providers>
-      </html>
+        </Providers>
+      </body>
+    </html>
   );
 }
